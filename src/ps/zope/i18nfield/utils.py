@@ -12,6 +12,7 @@ from zope.i18n.negotiator import negotiator
 # local imports
 from ps.zope.i18nfield.interfaces import ILanguageAvailability
 
+DEFAULT_LANGUAGE = u'en'
 
 def uninvl(value, default=u''):
     """Get specified value converted to unicode, or an empty unicode string if
@@ -41,7 +42,11 @@ def get_language(request=None):
 
 
 def get_default_language():
-    return u'en'
+    """Return the default fallback languages."""
+    utility = queryUtility(ILanguageAvailability)
+    if utility is not None:
+        return utility.getDefaultLanguage()
+    return DEFAULT_LANGUAGE
 
 
 def available_languages():
@@ -49,4 +54,4 @@ def available_languages():
     utility = queryUtility(ILanguageAvailability)
     if utility is not None:
         return utility.getAvailableLanguages()
-    return [u'en']
+    return [DEFAULT_LANGUAGE]

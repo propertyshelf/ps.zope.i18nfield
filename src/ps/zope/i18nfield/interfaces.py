@@ -11,6 +11,9 @@ from zope.schema import interfaces
 class ILanguageAvailability(IBaseLanguageAvailability):
     """A list of available languages."""
 
+    def getDefaultLanguage(combined=False):
+        """Return the system default language."""
+
     def getLanguages(combined=False):
         """Return a sequence of Language objects for available languages."""
 

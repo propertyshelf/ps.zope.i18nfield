@@ -22,6 +22,9 @@ from ps.zope.i18nfield import (
 @implementer(interfaces.ILanguageAvailability)
 class LanguageAvailability(object):
 
+    def getDefaultLanguage(self, combined=False):
+        return u'en'
+
     def getAvailableLanguages(self, combined=False):
         return [u'de', u'en', u'es', u'fr', u'pt']
 
