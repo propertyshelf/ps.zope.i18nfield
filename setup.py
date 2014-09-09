@@ -54,6 +54,8 @@ setup(
     install_requires=[
         'setuptools',
         'ZODB3',
+        'zope.globalrequest',
+        'zope.i18n',
         'zope.interface',
         'zope.schema',
     ],

@@ -4,6 +4,14 @@
 # python imports
 import codecs
 
+# zope imports
+from zope.component import queryUtility
+from zope.globalrequest import getRequest
+from zope.i18n.negotiator import negotiator
+
+# local imports
+from ps.zope.i18nfield.interfaces import ILanguageAvailability
+
 
 def uninvl(value, default=u''):
     """Get specified value converted to unicode, or an empty unicode string if
@@ -24,7 +32,12 @@ def uninvl(value, default=u''):
 
 
 def get_language(request=None):
-    return u'en'
+    if request is None:
+        request = getRequest()
+    try:
+        return negotiator.getLanguage(available_languages(), request)
+    except TypeError:
+        return get_default_language()
 
 
 def get_default_language():
@@ -32,4 +45,8 @@ def get_default_language():
 
 
 def available_languages():
-    return [u'en', ]
+    """Return a list of available languages."""
+    utility = queryUtility(ILanguageAvailability)
+    if utility is not None:
+        return utility.getAvailableLanguages()
+    return [u'en']

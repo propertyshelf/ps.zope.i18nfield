@@ -2,8 +2,20 @@
 """Schema interfaces."""
 
 # zope imports
+from zope.i18n.interfaces import ILanguageAvailability as \
+    IBaseLanguageAvailability
 from zope.interface import Interface
 from zope.schema import interfaces
+
+
+class ILanguageAvailability(IBaseLanguageAvailability):
+    """A list of available languages."""
+
+    def getLanguages(combined=False):
+        """Return a sequence of Language objects for available languages."""
+
+    def getLanguageListing(combined=False):
+        """Return a sequence of language code and language name tuples."""
 
 
 class II18NField(interfaces.IDict):

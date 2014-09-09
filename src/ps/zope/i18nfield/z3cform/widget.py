@@ -14,9 +14,8 @@ from z3c.form.interfaces import (
     IFormLayer,
 )
 from z3c.form.widget import FieldWidget, Widget
-from zope.component import adapter
+from zope.component import adapter, queryUtility
 from zope.interface import implementer, implementsOnly
-from zope.schema.vocabulary import getVocabularyRegistry
 from zope.security.proxy import removeSecurityProxy
 
 # local imports
@@ -79,9 +78,8 @@ class I18NWidget(HTMLFormElement, Widget):
 
     @memoize
     def sorted_languages(self):
-        registry = getVocabularyRegistry()
-        vocab = registry.get(None, 'languages.allowed')
-        tmp_languages = sorted([unicode(term.token) for term in vocab])
+        available = utils.available_languages()
+        tmp_languages = sorted([unicode(key) for key in available])
         languages = []
         if u'en' in tmp_languages:
             tmp_languages.remove(u'en')
@@ -94,9 +92,10 @@ class I18NWidget(HTMLFormElement, Widget):
 
     @memoize
     def languages(self):
-        registry = getVocabularyRegistry()
-        vocab = registry.get(None, 'languages.allowed')
-        return dict((term.token, term.title) for term in vocab)
+        utility = queryUtility(interfaces.ILanguageAvailability)
+        if utility is None:
+            return None
+        return dict(utility.getLanguageListing())
 
     def current(self):
         lang = utils.get_language(request=self.request)
