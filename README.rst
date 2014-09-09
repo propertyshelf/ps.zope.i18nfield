@@ -4,7 +4,7 @@ ps.zope.i18nfield
 Introduction
 ============
 
-This package provides a `zope.schema` based field which allows multiple translations within the field.
+This package provides a `zope.schema`_ based field which allows multiple translations within the field.
 It uses a custom dictionary class for the storage.
 There is also a widget available for the `z3c.form`_ library.
 
