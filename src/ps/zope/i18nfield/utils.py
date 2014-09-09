@@ -23,7 +23,7 @@ def uninvl(value, default=u''):
         return codecs.decode(value or default, 'latin1')
 
 
-def get_language():
+def get_language(request=None):
     return u'en'
 
 

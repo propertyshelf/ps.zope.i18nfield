@@ -1,0 +1,53 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      tal:omit-tag=""
+      tal:define="languages view/languages | nothing;
+                  sorted_languages view/sorted_languages | nothing;
+                  current view/current | nothing;
+                  default_value view/default_value | nothing;"
+      i18n:domain="ps.zope.i18nfield">
+
+  <div class="enable-tabbing">
+    <ul class="nav">
+      <li class="warning default"
+          tal:condition="default_value"><a href="" data-toggle="tab"
+          tal:attributes="href string:#${view/id}__i18ntab--default;"
+          i18n:translate="">Default</a></li>
+      <li class=""
+          tal:repeat="language sorted_languages"
+          tal:attributes="class python:language==current and 'default' or ''"><a href="" data-toggle="tab" title=""
+          tal:define="language_name languages/?language"
+          tal:attributes="href string:#${view/id}__i18ntab--${language};
+                          title language_name"
+          tal:content="language_name">[language]</a></li>
+    </ul>
+    <div class="tab-content">
+      <div id=""
+           tal:condition="default_value"
+           tal:attributes="id string:${view/id}__i18ntab--default">
+        <p class="text-warning" i18n:translate="">Please copy the default text to the corresponding language.</p>
+        <div class="row-fluid" tal:define="widget python:view.getWidget('__default_value')">
+          <div class="span3">
+            <label i18n:translate="" tal:attributes="for widget/id">Default</label>
+          </div>
+          <div class="span9">
+            <input type="text" tal:replace="structure widget/render" />
+          </div>
+        </div>
+      </div>
+      <div id=""
+           tal:repeat="language sorted_languages"
+           tal:attributes="id string:${view/id}__i18ntab--${language}">
+        <div class="row-fluid" tal:define="widget python:view.getWidget(language)">
+          <div class="span3">
+            <label tal:content="languages/?language" tal:attributes="for widget/id">[language]</label>
+          </div>
+          <div class="span9">
+            <input type="text" tal:replace="structure widget/render" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>
