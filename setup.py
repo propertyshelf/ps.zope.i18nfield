@@ -53,6 +53,9 @@ setup(
     ),
     install_requires=[
         'setuptools',
+        'ZODB3',
+        'zope.interface',
+        'zope.schema',
     ],
     entry_points="""
     # -*- Entry points: -*-
