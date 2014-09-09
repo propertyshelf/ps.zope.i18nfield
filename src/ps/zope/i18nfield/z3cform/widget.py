@@ -47,9 +47,9 @@ class I18NWidgetProperty(object):
             setattr(widget, self.__name, value)
 
 
-@implementer(II18NWidget)
 class I18NWidget(HTMLFormElement, Widget):
     """Base class for all I18N widgets."""
+    implementsOnly(II18NWidget)
 
     default_widget = None
 

@@ -2,11 +2,7 @@
 """Widget interface definitions."""
 
 # zope imports
-from z3c.form.interfaces import (
-    ITextAreaWidget,
-    ITextWidget,
-    IWidget,
-)
+from z3c.form.interfaces import IWidget
 from zope import schema
 
 
@@ -20,9 +16,9 @@ class II18NWidget(IWidget):
     )
 
 
-class II18NTextWidget(II18NWidget, ITextWidget):
+class II18NTextWidget(II18NWidget):
     """I18N text widget."""
 
 
-class II18NTextAreaWidget(II18NWidget, ITextAreaWidget):
+class II18NTextAreaWidget(II18NWidget):
     """I18N textarea widget."""
