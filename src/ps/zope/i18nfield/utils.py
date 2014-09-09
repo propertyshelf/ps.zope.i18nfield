@@ -14,7 +14,8 @@ from ps.zope.i18nfield.interfaces import ILanguageAvailability
 
 DEFAULT_LANGUAGE = u'en'
 
-def uninvl(value, default=u''):
+
+def to_unicode(value, default=u''):
     """Get specified value converted to unicode, or an empty unicode string if
     value is empty
 

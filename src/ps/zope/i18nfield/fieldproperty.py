@@ -97,5 +97,5 @@ class I18NTextProperty(I18NFieldProperty):
         super(I18NTextProperty, self).__init__(
             field,
             name,
-            value_converters=(utils.uninvl,)
+            value_converters=(utils.to_unicode,)
         )
