@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ps.zope.i18nfield\n"
-"POT-Creation-Date: 2014-07-23 13:58+0000\n"
+"POT-Creation-Date: 2014-09-09 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,3 +13,12 @@ msgstr ""
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ps.zope.i18nfield\n"
+
+#: ps/zope/i18nfield/z3cform/widget_input.pt:14
+msgid "Default"
+msgstr ""
+
+#: ps/zope/i18nfield/z3cform/widget_input.pt:29
+msgid "Please copy the default text to the corresponding language."
+msgstr ""
+
