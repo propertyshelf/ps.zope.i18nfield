@@ -26,4 +26,4 @@ class I18NFieldDataConverter(BaseDataConverter):
     def toFieldValue(self, value):
         if isinstance(value, basestring):
             return {}
-        return value
+        return dict([(k, v) for k, v in value.items() if v])
