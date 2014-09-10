@@ -42,8 +42,8 @@ class II18NDictReader(Interface):
     def __str__():
         """Create a string representation of the dictionary."""
 
-    def get(key, default=None):
-        """Get given key from dict, or default if key is missing"""
+    def __nonzero__():
+        """Return whether the dictionary is considered empty or not."""
 
     def keys():
         """Get dict keys"""
@@ -55,7 +55,11 @@ class II18NDictReader(Interface):
         """Get dict items"""
 
     def copy():
-        """Return an exact copy of the given dict, including default value"""
+        """Return an exact copy of the given dict with all associated
+        properties."""
+
+    def to_dict():
+        """Return a plain dict representation of the object."""
 
 
 class II18NDictWriter(Interface):
@@ -70,7 +74,13 @@ class II18NDictWriter(Interface):
     def clear():
         """Remove all dict values"""
 
-    def update(b):
+    def add(language, value):
+        """Add a value for the given language."""
+
+    def remove(language):
+        """Remove the value for the given language."""
+
+    def update(*args, **kwargs):
         """Update dict with values from specified dict"""
 
     def setdefault(key, failobj=None):

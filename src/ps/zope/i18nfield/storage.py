@@ -33,8 +33,8 @@ class I18NDict(PersistentDict):
         self.required = False
 
     def __unicode__(self):
-        """Create a string representation of the dictionary by first trying to
-        access the value for the current selected language (i.e. from the
+        """Return the unicode representation of the dictionary by first trying
+        to access the value for the current selected language (i.e. from the
         request). If no value exists for this language and the associated
         schema field is required, try to find the best default fallback value
         available.
@@ -46,13 +46,16 @@ class I18NDict(PersistentDict):
         return unicode(result)
 
     def __str__(self):
+        """Return the utf-8 encoded respresentation of the dictionary."""
         return unicode(self).encode('utf-8')
 
     def __nonzero__(self):
+        """Return whether the dictionary is considered empty or not."""
         lang_req = utils.get_language()
         return self.get(lang_req, self.get(KEY_DEFAULT)) is not None
 
     def __setitem__(self, key, value):
+        """Set a new value, but first doing a validity check."""
         if not value:
             return
         if key != KEY_DEFAULT and key not in utils.available_languages():
@@ -62,8 +65,8 @@ class I18NDict(PersistentDict):
     def get_default_value(self):
         """Returns the best available default value based on the following
         order:
-        1. self.default_language (closest lookup)
-        2. Context/application default (adapter/utility)
+        1. self.default_language
+        2. Context/application default (utility)
         3. First non-empty value
         4. None
         """
@@ -78,19 +81,29 @@ class I18NDict(PersistentDict):
         return result
 
     def copy(self):
+        """Return an exact copy of the given dict with all associated
+        properties."""
         result = I18NDict(**self)
         result.default_language = self.default_language
         result.required = self.required
         return result
 
+    def to_dict(self):
+        """Return a plain dict representation of the object."""
+        return dict(**self)
+
     def add(self, language, value):
+        """Add a value for the given language."""
         self[language] = value
 
     def remove(self, language):
+        """Remove the value for the given language."""
         if language in self:
             del self[language]
 
     def update(self, *args, **kwargs):
+        """Update the current dict with either a list of tuples or another
+        dictionary."""
         if args:
             if len(args) > 1:
                 raise TypeError('update expected at most 1 arguments, '
@@ -100,6 +113,3 @@ class I18NDict(PersistentDict):
                 self[key] = other[key]
         for key in kwargs:
             self[key] = kwargs[key]
-
-    def to_dict(self):
-        return dict(**self)
