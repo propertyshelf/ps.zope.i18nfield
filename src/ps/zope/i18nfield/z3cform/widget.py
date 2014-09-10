@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """I18N widget for z3c.form."""
 
+# python imports
+from copy import copy
+
 # zope imports
 from persistent.dict import PersistentDict
 from plone.memoize.view import memoize
-from z3c.form.browser.text import TextWidget
-from z3c.form.browser.textarea import TextAreaWidget
+from z3c.form.browser import (
+    text,
+    textarea,
+)
 from z3c.form.browser.widget import HTMLFormElement
 from z3c.form.interfaces import (
     NO_VALUE,
@@ -13,9 +18,18 @@ from z3c.form.interfaces import (
     IFieldWidget,
     IFormLayer,
 )
-from z3c.form.widget import FieldWidget, Widget
-from zope.component import adapter, queryUtility
-from zope.interface import implementer, implementsOnly
+from z3c.form.widget import (
+    FieldWidget,
+    Widget,
+)
+from zope.component import (
+    adapter,
+    queryUtility,
+)
+from zope.interface import (
+    implementer,
+    implementsOnly,
+)
 from zope.security.proxy import removeSecurityProxy
 
 # local imports
@@ -24,6 +38,7 @@ from ps.zope.i18nfield import (
     storage,
     utils,
 )
+from ps.zope.i18nfield.i18n import _
 from ps.zope.i18nfield.z3cform.interfaces import (
     II18NTextAreaWidget,
     II18NTextWidget,
@@ -51,6 +66,13 @@ class I18NWidget(HTMLFormElement, Widget):
     implementsOnly(II18NWidget)
 
     default_widget = None
+    show_label = True
+    default_label = _(u'Default')
+    default_info = _(
+        u'Please copy the default text to the corresponding language.'
+    )
+    option_select_language = _(u'Select language')
+    button_add_language = _(u'Add translation')
 
     # IHTMLCoreAttributes properties
     klass = 'i18n-widget'
@@ -75,6 +97,11 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def __init__(self, request):
         super(I18NWidget, self).__init__(request)
+
+    def available_languages(self):
+        if self.value and self.value.keys():
+            return self.value.keys()
+        return [self.current()]
 
     @memoize
     def sorted_languages(self):
@@ -141,12 +168,25 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def extract(self, default=NO_VALUE):
         """See z3c.form.interfaces.IWidget."""
+        form_keys = self.request.form.keys()
+        can_add = '{0}.button_add'.format(self.name) in form_keys
+        available_languages = copy(self.sorted_languages())
+        available_languages.append(storage.KEY_DEFAULT)
         result = {}
-        for key in self.request.form.keys():
+
+        for key in form_keys:
             if not key.startswith(self.name):
                 continue
             lang = key.split('.').pop()
-            result[lang] = self.request.get(key, default)
+            if lang == 'add' and can_add:
+                lang = self.request.get(key, default)
+                if isinstance(lang, list):
+                    lang = lang.pop()
+                if lang in available_languages:
+                    result[lang] = u''
+            else:
+                if lang in available_languages:
+                    result[lang] = self.request.get(key, default)
         if len(result.keys()) < 1:
             result = default
         return result
@@ -177,11 +217,11 @@ class I18NWidget(HTMLFormElement, Widget):
         return super(I18NWidget, self).render()
 
 
-class I18NTextWidget(I18NWidget, TextWidget):
+class I18NTextWidget(I18NWidget, text.TextWidget):
     """I18N text input type implementation."""
     implementsOnly(II18NTextWidget)
 
-    default_widget = TextWidget
+    default_widget = text.TextWidget
 
     maxlength = I18NWidgetProperty('maxlength')
     size = I18NWidgetProperty('size')
@@ -198,11 +238,11 @@ def I18NTextFieldWidget(field, request):
     return FieldWidget(field, I18NTextWidget(request))
 
 
-class I18NTextAreaWidget(I18NWidget, TextAreaWidget):
+class I18NTextAreaWidget(I18NWidget, textarea.TextAreaWidget):
     """I18N text input type implementation."""
     implementsOnly(II18NTextAreaWidget)
 
-    default_widget = TextAreaWidget
+    default_widget = textarea.TextAreaWidget
 
     rows = I18NWidgetProperty('rows')
     cols = I18NWidgetProperty('cols')
