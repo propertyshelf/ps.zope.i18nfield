@@ -4,8 +4,10 @@
 # zope imports
 from persistent.dict import PersistentDict
 from plone.memoize.view import memoize
-from z3c.form.browser.text import TextWidget
-from z3c.form.browser.textarea import TextAreaWidget
+from z3c.form.browser import (
+    text,
+    textarea,
+)
 from z3c.form.browser.widget import HTMLFormElement
 from z3c.form.interfaces import (
     NO_VALUE,
@@ -13,9 +15,18 @@ from z3c.form.interfaces import (
     IFieldWidget,
     IFormLayer,
 )
-from z3c.form.widget import FieldWidget, Widget
-from zope.component import adapter, queryUtility
-from zope.interface import implementer, implementsOnly
+from z3c.form.widget import (
+    FieldWidget,
+    Widget,
+)
+from zope.component import (
+    adapter,
+    queryUtility,
+)
+from zope.interface import (
+    implementer,
+    implementsOnly,
+)
 from zope.security.proxy import removeSecurityProxy
 
 # local imports
@@ -177,11 +188,11 @@ class I18NWidget(HTMLFormElement, Widget):
         return super(I18NWidget, self).render()
 
 
-class I18NTextWidget(I18NWidget, TextWidget):
+class I18NTextWidget(I18NWidget, text.TextWidget):
     """I18N text input type implementation."""
     implementsOnly(II18NTextWidget)
 
-    default_widget = TextWidget
+    default_widget = text.TextWidget
 
     maxlength = I18NWidgetProperty('maxlength')
     size = I18NWidgetProperty('size')
@@ -198,11 +209,11 @@ def I18NTextFieldWidget(field, request):
     return FieldWidget(field, I18NTextWidget(request))
 
 
-class I18NTextAreaWidget(I18NWidget, TextAreaWidget):
+class I18NTextAreaWidget(I18NWidget, textarea.TextAreaWidget):
     """I18N text input type implementation."""
     implementsOnly(II18NTextAreaWidget)
 
-    default_widget = TextAreaWidget
+    default_widget = textarea.TextAreaWidget
 
     rows = I18NWidgetProperty('rows')
     cols = I18NWidgetProperty('cols')
