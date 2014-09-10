@@ -63,4 +63,21 @@
     </div>
   </tal:languages>
 
+  <div class="buttons">
+    <select name="" id=""
+            tal:attributes="id string:${view/id}__add;
+                            name string:${view/name}.add">
+      <option value="" tal:content="view/option_select_language | nothing"></option>
+      <tal:languages tal:repeat="language sorted_languages">
+        <option tal:condition="python: language not in available_languages"
+                tal:attributes="value language"
+                tal:content="languages/?language"></option>
+      </tal:languages>
+    </select>
+    <input name="add" type="submit" value=""
+           tal:attributes="name string:${view/name}.button_add;
+                           value view/button_add_language | nothing;"
+           i18n:attributes="value" />
+  </div>
+
 </html>

@@ -68,6 +68,8 @@ class I18NWidget(HTMLFormElement, Widget):
     default_info = _(
         u'Please copy the default text to the corresponding language.'
     )
+    option_select_language = _(u'Select language')
+    button_add_language = _(u'Add translation')
 
     # IHTMLCoreAttributes properties
     klass = 'i18n-widget'
