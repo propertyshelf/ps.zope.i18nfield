@@ -62,8 +62,8 @@ class I18NFieldProperty(schema.fieldproperty.FieldProperty):
             raise ValueError(self.__name, u'Field is readonly')
 
         # set the new I18nDict
-        storage_dict._default_language = field._default_language
-        storage_dict._required = field.required
+        storage_dict.default_language = field._default_language
+        storage_dict.required = field.required
         storage_dict.update(validate_dict)
         instance.__dict__[self.__name] = storage_dict
 
