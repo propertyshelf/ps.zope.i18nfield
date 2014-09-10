@@ -35,6 +35,7 @@ from ps.zope.i18nfield import (
     storage,
     utils,
 )
+from ps.zope.i18nfield.i18n import _
 from ps.zope.i18nfield.z3cform.interfaces import (
     II18NTextAreaWidget,
     II18NTextWidget,
@@ -62,6 +63,11 @@ class I18NWidget(HTMLFormElement, Widget):
     implementsOnly(II18NWidget)
 
     default_widget = None
+    show_label = True
+    default_label = _(u'Default')
+    default_info = _(
+        u'Please copy the default text to the corresponding language.'
+    )
 
     # IHTMLCoreAttributes properties
     klass = 'i18n-widget'

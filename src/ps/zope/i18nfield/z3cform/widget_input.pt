@@ -8,46 +8,55 @@
                   default_value view/default_value | nothing;"
       i18n:domain="ps.zope.i18nfield">
 
-  <div class="enable-tabbing">
-    <ul class="nav">
-      <li class="warning default"
-          tal:condition="default_value"><a href="" data-toggle="tab"
-          tal:attributes="href string:#${view/id}__i18ntab--default;"
-          i18n:translate="">Default</a></li>
-      <li class=""
-          tal:repeat="language sorted_languages"
-          tal:attributes="class python:language==current and 'default' or ''"><a href="" data-toggle="tab" title=""
-          tal:define="language_name languages/?language"
-          tal:attributes="href string:#${view/id}__i18ntab--${language};
-                          title language_name"
-          tal:content="language_name">[language]</a></li>
-    </ul>
-    <div class="tab-content">
-      <div id=""
-           tal:condition="default_value"
-           tal:attributes="id string:${view/id}__i18ntab--default">
-        <p class="text-warning" i18n:translate="">Please copy the default text to the corresponding language.</p>
-        <div class="row-fluid" tal:define="widget python:view.getWidget('__default_value')">
-          <div class="span3">
-            <label i18n:translate="" tal:attributes="for widget/id">Default</label>
-          </div>
-          <div class="span9">
-            <input type="text" tal:replace="structure widget/render" />
-          </div>
+  <div class="i18n-widget__row widget__row--default" id=""
+       tal:condition="default_value"
+       tal:attributes="id string:${view/id}__widget--default">
+    <p class="i18n-widget__text-warning"
+       tal:define="info view/default_info | nothing"
+       tal:condition="info"
+       tal:content="info">[info]</p>
+
+    <tal:widget tal:define="widget python:view.getWidget('__default_value')">
+      <div class="label"
+           tal:condition="view/show_label | nothing">
+        <label tal:attributes="for widget/id">
+          <span i18n:translate=""
+                tal:content="view/default_label | nothing">[label]</span>
+          <span class="required"
+                tal:condition="widget/required">*</span>
+        </label>
+      </div>
+      <div tal:condition="widget/error"
+           tal:replace="structure widget/error/render">[error]</div>
+      <div class="widget">
+        <div class="i18n-widget__input"
+             tal:content="structure widget/render">
+          <input size="24" value="" type="text" />
         </div>
       </div>
-      <div id=""
-           tal:repeat="language sorted_languages"
-           tal:attributes="id string:${view/id}__i18ntab--${language}">
-        <div class="row-fluid" tal:define="widget python:view.getWidget(language)">
-          <div class="span3">
-            <label tal:content="languages/?language" tal:attributes="for widget/id">[language]</label>
-          </div>
-          <div class="span9">
-            <input type="text" tal:replace="structure widget/render" />
-          </div>
+    </tal:widget>
+  </div>
+
+  <div class="i18n-widget__row widget__row--default" id=""
+       tal:repeat="language sorted_languages"
+       tal:attributes="id string:${view/id}__widget--${language}">
+    <tal:widget tal:define="widget python:view.getWidget(language)">
+      <div class="label"
+           tal:condition="view/show_label | nothing">
+        <label tal:attributes="for widget/id">
+          <span tal:content="languages/?language">[language]</span>
+          <span class="required"
+                tal:condition="widget/required">*</span>
+        </label>
+      </div>
+      <div tal:condition="widget/error"
+           tal:replace="structure widget/error/render">[error]</div>
+      <div class="widget">
+        <div class="i18n-widget__input"
+             tal:content="structure widget/render">
+          <input size="24" value="" type="text" />
         </div>
       </div>
-    </div>
+    </tal:widget>
   </div>
 </html>
