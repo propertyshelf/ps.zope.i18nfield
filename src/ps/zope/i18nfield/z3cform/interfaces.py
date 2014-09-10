@@ -3,17 +3,37 @@
 
 # zope imports
 from z3c.form.interfaces import IWidget
-from zope import schema
 
 
 class II18NWidget(IWidget):
     """I18N base widget."""
 
-    langs = schema.List(
-        title=u'Languages',
-        description=u'List of languages supported by the given widget.',
-        required=True,
-    )
+    def sorted_languages():
+        """Returns a list of the language codes in a sorted order."""
+
+    def languages():
+        """Returns a dictionary of language codes with language names."""
+
+    def current():
+        """Return the current display language."""
+
+    def default_value():
+        """Return the default value if it exists for the current widget."""
+
+    def initWidget(widget, language):
+        """Initialize the subwidget for the given language."""
+
+    def updateWidget(widget, language):
+        """Update the subwidget for the given language."""
+
+    def getWidget(language):
+        """Get the subwidget for the given language."""
+
+    def getValue(language):
+        """Get the value for the given language."""
+
+    def hasValue(language):
+        """Return whether a value exists for the given language."""
 
 
 class II18NTextWidget(II18NWidget):
