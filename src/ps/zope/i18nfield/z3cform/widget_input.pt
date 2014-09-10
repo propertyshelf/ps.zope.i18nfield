@@ -6,7 +6,7 @@
                   sorted_languages view/sorted_languages | nothing;
                   current view/current | nothing;
                   default_value view/default_value | nothing;
-                  available_languages python: view.value.keys();"
+                  available_languages view/available_languages | nothing;"
       i18n:domain="ps.zope.i18nfield">
 
   <div class="i18n-widget__row widget__row--default" id=""

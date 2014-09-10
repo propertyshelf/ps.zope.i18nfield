@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 """I18N widget for z3c.form."""
 
+# python imports
+from copy import copy
+
 # zope imports
 from persistent.dict import PersistentDict
 from plone.memoize.view import memoize
@@ -95,6 +98,11 @@ class I18NWidget(HTMLFormElement, Widget):
     def __init__(self, request):
         super(I18NWidget, self).__init__(request)
 
+    def available_languages(self):
+        if self.value and self.value.keys():
+            return self.value.keys()
+        return [self.current()]
+
     @memoize
     def sorted_languages(self):
         available = utils.available_languages()
@@ -160,12 +168,25 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def extract(self, default=NO_VALUE):
         """See z3c.form.interfaces.IWidget."""
+        form_keys = self.request.form.keys()
+        can_add = '{0}.button_add'.format(self.name) in form_keys
+        available_languages = copy(self.sorted_languages())
+        available_languages.append(storage.KEY_DEFAULT)
         result = {}
-        for key in self.request.form.keys():
+
+        for key in form_keys:
             if not key.startswith(self.name):
                 continue
             lang = key.split('.').pop()
-            result[lang] = self.request.get(key, default)
+            if lang == 'add' and can_add:
+                lang = self.request.get(key, default)
+                if isinstance(lang, list):
+                    lang = lang.pop()
+                if lang in available_languages:
+                    result[lang] = u''
+            else:
+                if lang in available_languages:
+                    result[lang] = self.request.get(key, default)
         if len(result.keys()) < 1:
             result = default
         return result
