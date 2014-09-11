@@ -3,6 +3,7 @@
 
 # python imports
 from copy import copy
+import json
 
 # zope imports
 from persistent.dict import PersistentDict
@@ -105,6 +106,17 @@ class I18NWidget(HTMLFormElement, Widget):
                 langs.append(utils.get_language(request=self.request))
             return langs
         return [self.current()]
+
+    def addable_languages(self):
+        languages = self.languages()
+        sorted_langs = self.sorted_languages()
+        available_langs = self.available_languages()
+        result = [
+            {'lang': str(l), 'name': languages.get(l)}
+            for l in sorted_langs
+            if l not in available_langs
+        ]
+        return json.dumps(result)
 
     @memoize
     def sorted_languages(self):
