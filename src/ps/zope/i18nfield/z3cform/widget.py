@@ -31,6 +31,11 @@ from zope.interface import (
     implementer,
     implementsOnly,
 )
+from zope.publisher.browser import BrowserView
+from zope.publisher.interfaces import (
+    IPublishTraverse,
+    NotFound,
+)
 from zope.security.proxy import removeSecurityProxy
 
 # local imports
@@ -210,8 +215,7 @@ class I18NWidget(HTMLFormElement, Widget):
         widget.value = self.getValue(language)
 
     def getWidget(self, language):
-        widget = self.widgets[language]
-        return widget
+        return self.widgets.get(language)
 
     def getValue(self, language):
         self.value = removeSecurityProxy(self.value)
@@ -270,3 +274,26 @@ class I18NTextAreaWidget(I18NWidget, textarea.TextAreaWidget):
 def I18NTextAreaFieldWidget(field, request):
     """IFieldWidget factory for I18NTextWidget."""
     return FieldWidget(field, I18NTextAreaWidget(request))
+
+
+@implementer(IPublishTraverse)
+class WidgetAjax(BrowserView):
+
+    def __init__(self, context, request):
+        context = removeSecurityProxy(context)
+        super(WidgetAjax, self).__init__(context, request)
+        self.language = None
+
+    def publishTraverse(self, request, name):
+        if self.language is None:
+            self.language = name
+        else:
+            raise NotFound(self, name, request)
+        return self
+
+    def __call__(self):
+        if self.language is None:
+            return
+        widget = self.context.getWidget(self.language)
+        if widget is not None:
+            return widget.render()

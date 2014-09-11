@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:z3c="http://namespaces.zope.org/z3c"
     i18n_domain="ps.zope.i18nfield">
 
@@ -52,6 +53,13 @@
       mode="hidden"
       template="widget_hidden.pt"
       widget=".interfaces.II18NWidget"
+      />
+
+  <browser:page
+      name="load_widget"
+      for=".interfaces.II18NWidget"
+      class=".widget.WidgetAjax"
+      permission="zope.View"
       />
 
 </configure>
