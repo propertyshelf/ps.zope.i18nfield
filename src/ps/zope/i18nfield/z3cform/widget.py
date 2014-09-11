@@ -100,7 +100,10 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def available_languages(self):
         if self.value and self.value.keys():
-            return self.value.keys()
+            langs = self.value.keys()
+            if storage.KEY_DEFAULT in langs and len(langs) == 1:
+                langs.append(utils.get_language(request=self.request))
+            return langs
         return [self.current()]
 
     @memoize
