@@ -54,12 +54,20 @@ class II18NDictReader(Interface):
     def items():
         """Get dict items"""
 
+    def get_for_language(language):
+        """Get the value for a specific language using the appropriate default
+        if it is a required field.
+        """
+
     def copy():
         """Return an exact copy of the given dict with all associated
         properties."""
 
     def to_dict():
         """Return a plain dict representation of the object."""
+
+    def to_text():
+        """Return a string of all text values appended together."""
 
 
 class II18NDictWriter(Interface):

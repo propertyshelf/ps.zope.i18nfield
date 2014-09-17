@@ -40,10 +40,7 @@ class I18NDict(PersistentDict):
         available.
         """
         lang_req = utils.get_language()
-        result = self.get(lang_req, self.get(KEY_DEFAULT))
-        if not result and self.required:
-            result = self.get_default_value()
-        return unicode(result)
+        return unicode(self.get_for_language(lang_req))
 
     def __str__(self):
         """Return the utf-8 encoded respresentation of the dictionary."""
@@ -80,17 +77,14 @@ class I18NDict(PersistentDict):
 
         return result
 
-    def copy(self):
-        """Return an exact copy of the given dict with all associated
-        properties."""
-        result = I18NDict(**self)
-        result.default_language = self.default_language
-        result.required = self.required
+    def get_for_language(self, language):
+        """Get the value for a specific language using the appropriate default
+        if it is a required field.
+        """
+        result = self.get(language, self.get(KEY_DEFAULT))
+        if not result and self.required:
+            result = self.get_default_value()
         return result
-
-    def to_dict(self):
-        """Return a plain dict representation of the object."""
-        return dict(**self)
 
     def add(self, language, value):
         """Add a value for the given language."""
@@ -113,3 +107,19 @@ class I18NDict(PersistentDict):
                 self[key] = other[key]
         for key in kwargs:
             self[key] = kwargs[key]
+
+    def copy(self):
+        """Return an exact copy of the given dict with all associated
+        properties."""
+        result = I18NDict(**self)
+        result.default_language = self.default_language
+        result.required = self.required
+        return result
+
+    def to_dict(self):
+        """Return a plain dict representation of the object."""
+        return dict(**self)
+
+    def to_text(self):
+        """Return a string of all text values appended together."""
+        return u' '.join(self.values())
