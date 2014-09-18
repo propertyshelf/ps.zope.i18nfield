@@ -25,7 +25,7 @@ class I18NIndex(FieldIndex):
         """See interface IStatistics"""
         index = self._indices.get(get_language())
         if index:
-            return len(index._fwd_index)
+            return index.wordCount()
         return len(self._fwd_index)
 
     def sort(self, docids, reverse=False, limit=None):
