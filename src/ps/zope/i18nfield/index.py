@@ -7,11 +7,11 @@ from ps.zope.i18nfield.utils import get_language, available_languages
 from z3c.indexer.index import FieldIndex
 
 
-class I18NIndex(FieldIndex):
+class I18NFieldIndex(FieldIndex):
 
     def clear(self):
         """Initialize forward and reverse mappings."""
-        super(I18NIndex, self).clear()
+        super(I18NFieldIndex, self).clear()
         self._indices = self.family.OO.BTree()
 
     def documentCount(self):
@@ -19,14 +19,14 @@ class I18NIndex(FieldIndex):
         index = self._indices.get(get_language())
         if index:
             return index.documentCount()
-        return self._num_docs()
+        return super(I18NFieldIndex, self).documentCount()
 
     def wordCount(self):
         """See interface IStatistics"""
         index = self._indices.get(get_language())
         if index:
             return index.wordCount()
-        return len(self._fwd_index)
+        return super(I18NFieldIndex, self).wordCount()
 
     def sort(self, docids, reverse=False, limit=None):
         index = self._indices.get(get_language())
