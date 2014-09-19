@@ -84,6 +84,7 @@ class I18NFieldIndex(FieldIndex):
 
     def doUnIndex(self, oid):
         """Unindex a value by its object id."""
-        index = self._indices.get(get_language())
-        if index:
-            return index.unindex_doc(oid)
+        for lang in available_languages():
+            index = self._indices.get(lang)
+            if index:
+                index.doUnIndex(oid)
