@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Integration tests for the i18n utility methods."""
+"""Integration tests for the I18NDict."""
 
 # python imports
 try:
@@ -9,13 +9,13 @@ except ImportError:
 
 # zope imports
 from zope.component import provideUtility
-from zope.globalrequest import setRequest
 from zope.interface import implementer
 
 # local imports
 from ps.zope.i18nfield import (
     interfaces,
     storage,
+    utils,
 )
 
 
@@ -41,6 +41,11 @@ class TestI18NDict(unittest.TestCase):
     def setUp(self):
         super(TestI18NDict, self).setUp()
         provideUtility(LanguageAvailability())
+        self._old_func = utils.get_language
+
+    def tearDown(self):
+        super(TestI18NDict, self).tearDown()
+        utils.get_language = self._old_func
 
     def test_standard(self):
         """Test that the dictionary access with no default language."""
@@ -104,7 +109,6 @@ class TestI18NDict(unittest.TestCase):
 
     def test_unicode_representation(self):
         """Test the __unicode__ method of the dictionary."""
-        setRequest(None)
         data = storage.I18NDict()
         data.required = True
 
@@ -120,9 +124,20 @@ class TestI18NDict(unittest.TestCase):
         data[u'es'] = u'Español'
         self.assertEqual(unicode(data), u'English')
 
+        # request language Spanish
+        utils.get_language = lambda: u'es'
+        self.assertEqual(unicode(data), u'Español')
+
+        # request language French
+        utils.get_language = lambda: u'fr'
+        self.assertEqual(unicode(data), u'French')
+
+        # request language English
+        utils.get_language = lambda: u'en'
+        self.assertEqual(unicode(data), u'English')
+
     def test_string_representation(self):
         """Test the __str__ method of the dictionary."""
-        setRequest(None)
         data = storage.I18NDict()
         data.default_language = u'es'
         data.required = True
@@ -134,9 +149,26 @@ class TestI18NDict(unittest.TestCase):
         data[u'fr'] = u'French'
         self.assertEqual(str(data), 'French')
 
+        # no value for request language - fallback to internal I18nDict default
+        data[u'en'] = u'English'
+        data[u'es'] = u'Español'
+        utils.get_language = lambda: u'pt'
+        self.assertEqual(str(data), u'Español'.encode('utf-8'))
+
+        # request language Spanish
+        utils.get_language = lambda: u'es'
+        self.assertEqual(str(data), u'Español'.encode('utf-8'))
+
+        # request language French
+        utils.get_language = lambda: u'fr'
+        self.assertEqual(str(data), 'French')
+
+        # request language English
+        utils.get_language = lambda: u'en'
+        self.assertEqual(str(data), 'English')
+
     def test_not_required(self):
         """Test the __unicode__ method without a required field."""
-        setRequest(None)
         data = storage.I18NDict()
         data.default_language = u'es'
         data.required = False
@@ -236,3 +268,11 @@ class TestI18NDict(unittest.TestCase):
         self.assertNotIn(u'de', data)
         data.remove(u'not')
         self.assertEqual(len(data), 1)
+
+    def test_to_text(self):
+        """Test the to_text method."""
+        data = storage.I18NDict({u'en': u'English', u'de': u'Deutsch'})
+        self.assertIn(u'English', data.to_text())
+        self.assertIn(u'Deutsch', data.to_text())
+        data[u'es'] = u'El texto en español'
+        self.assertIn(u'El texto en español', data.to_text())
