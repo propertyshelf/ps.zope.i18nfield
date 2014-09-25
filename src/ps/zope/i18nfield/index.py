@@ -32,16 +32,19 @@ class I18NFieldIndex(FieldIndex):
         index = self._indices.get(get_language())
         if index:
             return index.sort(docids, reverse, limit)
+        return super(I18NFieldIndex, self).sort(docids, reverse, limit)
 
     def applyEq(self, value):
         index = self._indices.get(get_language())
         if index:
             return index.applyEq(value)
+        return super(I18NFieldIndex, self).applyEq(value)
 
     def applyNotEq(self, not_value):
         index = self._indices.get(get_language())
         if index:
             return index.applyNotEq(not_value)
+        return super(I18NFieldIndex, self).applyNotEq(not_value)
 
     def applyBetween(self, min_value, max_value, exclude_min=False,
                      exclude_max=False):
@@ -53,21 +56,30 @@ class I18NFieldIndex(FieldIndex):
                 exclude_min,
                 exclude_max,
             )
+        return super(I18NFieldIndex, self).applyBetween(
+            min_value,
+            max_value,
+            exclude_min,
+            exclude_max,
+        )
 
     def applyGe(self, min_value, exclude_min=False):
         index = self._indices.get(get_language())
         if index:
             return index.applyGe(min_value, exclude_min)
+        return super(I18NFieldIndex, self).applyGe(min_value, exclude_min)
 
     def applyLe(self, max_value, exclude_max=False):
         index = self._indices.get(get_language())
         if index:
             return index.applyLe(max_value, exclude_max)
+        return super(I18NFieldIndex, self).applyLe(max_value, exclude_max)
 
     def applyIn(self, values):
         index = self._indices.get(get_language())
         if index:
             return index.applyIn(values)
+        return super(I18NFieldIndex, self).applyIn(values)
 
     def doIndex(self, oid, value):
         """Index a value by its object id."""
