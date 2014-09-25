@@ -12,7 +12,7 @@ from zope.component import provideUtility
 from zope.interface import implementer
 
 # local imports
-from ps.zope.i18nfield import index, interfaces, storage
+from ps.zope.i18nfield import index, interfaces, storage, utils
 
 
 @implementer(interfaces.ILanguageAvailability)
@@ -37,6 +37,11 @@ class TestI18NFieldIndex(unittest.TestCase):
     def setUp(self):
         super(TestI18NFieldIndex, self).setUp()
         provideUtility(LanguageAvailability())
+        self._old_func = utils.get_language
+
+    def tearDown(self):
+        super(TestI18NFieldIndex, self).tearDown()
+        utils.get_language = self._old_func
 
     def test_do_index(self):
         """Test that the I18NDict values are indexed properly."""
@@ -178,3 +183,36 @@ class TestI18NFieldIndex(unittest.TestCase):
         # clear all indices
         idx.clear()
         self.assertEqual(len(idx._indices), 0)
+
+    def test_sort(self):
+        """Test the normal sort function."""
+        idx = index.I18NFieldIndex()
+        data = storage.I18NDict({
+            u'en': u'Title in english',
+            u'es': u'El título',
+        })
+        idx.doIndex(111, data)
+
+        data2 = storage.I18NDict({
+            u'en': u'English words',
+            u'es': u'Título en español',
+            u'de': u'Deutsch'
+        })
+        idx.doIndex(222, data2)
+
+        # request language English
+        utils.get_language = lambda: u'en'
+        self.assertEqual(list(idx.sort([111, 222])), [222, 111])
+
+        # request language Spanish
+        utils.get_language = lambda: u'es'
+        self.assertEqual(list(idx.sort([111, 222])), [111, 222])
+
+        # request language German
+        utils.get_language = lambda: u'de'
+        self.assertEqual(list(idx.sort([111, 222])), [222])
+
+    def test_sort_no_values(self):
+        """Test the sort function when no values are indexed."""
+        idx = index.I18NFieldIndex()
+        self.assertEqual(list(idx.sort([])), [])
