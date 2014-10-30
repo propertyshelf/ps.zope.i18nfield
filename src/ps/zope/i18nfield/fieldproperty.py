@@ -80,6 +80,8 @@ class I18NFieldProperty(schema.fieldproperty.FieldProperty):
         :returns: The prepared values
         :rtype: dict
         """
+        if value is None:
+            return {}
         if isinstance(value, dict) or isinstance(value, storage.I18NDict):
             for lang in value.keys():
                 if not value[lang]:
