@@ -55,6 +55,10 @@ class I18NFieldProperty(schema.fieldproperty.FieldProperty):
             validate_dict = value
             storage_dict = storage.I18NDict()
 
+        assert isinstance(validate_dict, dict), 'validate_dict must be dict'
+        assert isinstance(storage_dict, storage.I18NDict), \
+            'storage_dict must be I18NDict'
+
         # field validation
         field = self.__field.bind(instance)
         field.validate(validate_dict)
