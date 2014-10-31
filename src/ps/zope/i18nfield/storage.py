@@ -71,7 +71,7 @@ class I18NDict(PersistentDict):
         if not result:
             result = self.get(utils.get_default_language())
             if not result:
-                for value in self.values():
+                for value in sorted(self.values()):
                     if value:
                         return value
 
