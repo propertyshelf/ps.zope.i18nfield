@@ -276,3 +276,43 @@ class TestI18NDict(unittest.TestCase):
         self.assertIn(u'Deutsch', data.to_text())
         data[u'es'] = u'El texto en español'
         self.assertIn(u'El texto en español', data.to_text())
+
+    def test_nonzero_not_required(self):
+        """Test the __nonzero__ method."""
+        data = storage.I18NDict()
+        data.required = False
+
+        # no request, no values
+        self.assertFalse(bool(data))
+
+        # no request - no value for default language
+        data[u'fr'] = u'Français'
+        self.assertFalse(bool(data))
+
+        # no request - no value for default language
+        data[u'es'] = u'Español'
+        self.assertFalse(bool(data))
+
+        # no request - with a value for default language
+        data[u'en'] = u'English'
+        self.assertTrue(bool(data))
+
+    def test_nonzero_required(self):
+        """Test the __nonzero__ method."""
+        data = storage.I18NDict()
+        data.required = True
+
+        # no request, no values
+        self.assertFalse(bool(data))
+
+        # no request - fallback to first value found
+        data[u'fr'] = u'Français'
+        self.assertTrue(bool(data))
+
+        # no request - fallback to first value found
+        data[u'es'] = u'Español'
+        self.assertTrue(bool(data))
+
+        # no request - with a value for default language
+        data[u'en'] = u'English'
+        self.assertTrue(bool(data))

@@ -49,7 +49,7 @@ class I18NDict(PersistentDict):
     def __nonzero__(self):
         """Return whether the dictionary is considered empty or not."""
         lang_req = utils.get_language()
-        return self.get(lang_req, self.get(KEY_DEFAULT)) is not None
+        return self.get_for_language(lang_req) is not None
 
     def __setitem__(self, key, value):
         """Set a new value, but first doing a validity check."""
