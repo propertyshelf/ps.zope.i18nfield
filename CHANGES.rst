@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.1.2 (2014-11-01)
+------------------
+
+- Return empty dict when value is None.
+- Test for correct value types before we set any data.
+- Correctly evaluate the bool value of the I18NDict when the field is required.
+- When the fallback is the first value found, sort the values so that the result is consistent with each repeated call.
+
+
 0.1.1 (2014-09-25)
 ------------------
 
