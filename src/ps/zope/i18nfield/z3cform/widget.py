@@ -27,6 +27,7 @@ from zope.component import (
     adapter,
     queryUtility,
 )
+from zope.i18n import translate
 from zope.interface import (
     implementer,
     implementsOnly,
@@ -234,6 +235,10 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def render(self):
         return super(I18NWidget, self).render()
+
+    @property
+    def button_add_language_i18n(self):
+        return translate(self.button_add_language, context=self.request)
 
 
 class I18NTextWidget(I18NWidget, text.TextWidget):
