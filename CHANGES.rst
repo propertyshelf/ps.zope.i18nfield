@@ -1,10 +1,11 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.3 (2014-11-14)
+------------------
 
-- No changes yet.
+- Added translations (de, es).
+- Provide the 'Add translation' value already translated (e.g. for JS).
 
 
 0.1.2 (2014-11-01)
