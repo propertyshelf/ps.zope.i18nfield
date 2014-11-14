@@ -1,10 +1,10 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.3.1 (2014-11-14)
+--------------------
 
-- No changes yet.
+- Added en translation.
 
 
 0.1.3 (2014-11-14)
