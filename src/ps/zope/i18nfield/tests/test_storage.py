@@ -113,7 +113,7 @@ class TestI18NDict(unittest.TestCase):
         data.required = True
 
         # no request, no values
-        self.assertEqual(unicode(data), u'None')
+        self.assertEqual(unicode(data), u'')
 
         # no request - fallback to first value
         data[u'fr'] = u'French'
@@ -143,7 +143,7 @@ class TestI18NDict(unittest.TestCase):
         data.required = True
 
         # no request, no values
-        self.assertEqual(str(data), 'None')
+        self.assertEqual(str(data), '')
 
         # no request - fallback to first value
         data[u'fr'] = u'French'
@@ -177,7 +177,7 @@ class TestI18NDict(unittest.TestCase):
         data[u'es'] = u'Español'
 
         # no request, no value for default language 'en'
-        self.assertEqual(unicode(data), u'None')
+        self.assertEqual(unicode(data), u'')
 
         # with required
         data.required = True
