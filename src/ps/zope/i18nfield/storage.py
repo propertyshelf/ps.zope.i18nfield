@@ -39,8 +39,13 @@ class I18NDict(PersistentDict):
         schema field is required, try to find the best default fallback value
         available.
         """
+        if len(self) == 0:
+            return u''
         lang_req = utils.get_language()
-        return unicode(self.get_for_language(lang_req))
+        value = self.get_for_language(lang_req)
+        if value is None:
+            return u''
+        return unicode(value)
 
     def __str__(self):
         """Return the utf-8 encoded respresentation of the dictionary."""
