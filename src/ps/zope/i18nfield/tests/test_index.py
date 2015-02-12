@@ -92,7 +92,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data = storage.I18NDict({u'en': u'English', u'de': u'Deutsch'})
         data.required = True
         idx.doIndex(111, data)
-        self.assertEqual(len(idx._indices), 5)
+        self.assertEqual(len(idx._indices), 5)  # number of available langauges
 
         # English
         sub_idx = idx._indices[u'en']
@@ -112,7 +112,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         })
         data2.required = True
         idx.doIndex(222, data2)
-        self.assertEqual(len(idx._indices), 5)
+        self.assertEqual(len(idx._indices), 5)  # number of available langauges
 
         # English
         sub_idx = idx._indices[u'en']
@@ -216,3 +216,76 @@ class TestI18NFieldIndex(unittest.TestCase):
         """Test the sort function when no values are indexed."""
         idx = index.I18NFieldIndex()
         self.assertEqual(list(idx.sort([])), [])
+
+    def test_do_index_dict(self):
+        """Test that normal dict values are indexed properly."""
+        idx = index.I18NFieldIndex()
+        data = {u'en': u'English', u'de': u'Deutsch'}
+        idx.doIndex(111, data)
+        self.assertEqual(len(idx._indices), 2)
+
+        # English
+        sub_idx = idx._indices[u'en']
+        self.assertEqual(sub_idx.documentCount(), 1)
+        self.assertEqual(sub_idx.wordCount(), 1)
+
+        data2 = {
+            u'en': u'English with more words',
+            u'es': u'Español con más palabras',
+            u'de': u'Deutsch'
+        }
+        idx.doIndex(222, data2)
+        self.assertEqual(len(idx._indices), 3)
+
+        # English
+        sub_idx = idx._indices[u'en']
+        self.assertEqual(sub_idx.documentCount(), 2)
+        self.assertEqual(sub_idx.wordCount(), 2)
+        self.assertIn(u'English', list(sub_idx._rev_index.values()))
+        self.assertIn(
+            u'English with more words',
+            list(sub_idx._rev_index.values()),
+        )
+        # Spanish
+        sub_idx = idx._indices[u'es']
+        self.assertEqual(sub_idx.documentCount(), 1)
+        self.assertEqual(sub_idx.wordCount(), 1)
+        self.assertIn(
+            u'Español con más palabras',
+            list(sub_idx._rev_index.values()),
+        )
+        # German
+        sub_idx = idx._indices[u'de']
+        self.assertEqual(sub_idx.documentCount(), 2)
+        self.assertEqual(sub_idx.wordCount(), 1)
+        self.assertIn(u'Deutsch', list(sub_idx._rev_index.values()))
+
+    def test_do_index_value(self):
+        """Test that any other values are indexed properly."""
+        idx = index.I18NFieldIndex()
+        value = u'Value1'
+        idx.doIndex(111, value)
+        self.assertEqual(len(idx._indices), 5)  # number of available langauges
+
+        # English
+        sub_idx = idx._indices[u'en']
+        self.assertEqual(sub_idx.documentCount(), 1)
+        self.assertEqual(sub_idx.wordCount(), 1)
+        self.assertIn(u'Value1', list(sub_idx._rev_index.values()))
+
+        # Spanish
+        sub_idx = idx._indices[u'es']
+        self.assertEqual(sub_idx.documentCount(), 1)
+        self.assertEqual(sub_idx.wordCount(), 1)
+        self.assertIn(u'Value1', list(sub_idx._rev_index.values()))
+
+        value2 = u'Value2'
+        idx.doIndex(222, value2)
+        self.assertEqual(len(idx._indices), 5)  # number of available langauges
+
+        # German
+        sub_idx = idx._indices[u'de']
+        self.assertEqual(sub_idx.documentCount(), 2)
+        self.assertEqual(sub_idx.wordCount(), 2)
+        self.assertIn(u'Value1', list(sub_idx._rev_index.values()))
+        self.assertIn(u'Value2', list(sub_idx._rev_index.values()))

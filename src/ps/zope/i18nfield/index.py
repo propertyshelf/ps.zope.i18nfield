@@ -88,13 +88,27 @@ class I18NFieldIndex(FieldIndex):
                 lang_val = value.get_for_language(lang)
                 if lang_val is None:
                     continue
-                index = self._indices.get(lang)
-                if index is None:
-                    index = self._indices[lang] = FieldIndex()
+                index = self.get_or_add_index(lang)
                 index.doIndex(oid, lang_val)
-            return
+        elif isinstance(value, dict):
+            for lang in utils.available_languages():
+                lang_val = value.get(lang)
+                if lang_val is None:
+                    continue
+                index = self.get_or_add_index(lang)
+                index.doIndex(oid, lang_val)
+        else:
+            for lang in utils.available_languages():
+                index = self.get_or_add_index(lang)
+                index.doIndex(oid, value)
 
     def doUnIndex(self, oid):
         """Unindex a value by its object id."""
         for index in self._indices.values():
             index.doUnIndex(oid)
+
+    def get_or_add_index(self, lang):
+        index = self._indices.get(lang)
+        if index is None:
+            index = self._indices[lang] = FieldIndex()
+        return index
