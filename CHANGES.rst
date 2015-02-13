@@ -1,10 +1,11 @@
 Changelog
 =========
 
-0.2 (unreleased)
-----------------
+0.1.4 (2015-02-13)
+------------------
 
-- No changes yet.
+- Allow for indexing of normal dict and other values as well as I18NDict.
+- Better to iterate over the existing indices in case the available language configuration changes.
 
 
 0.1.3.1 (2014-11-14)
