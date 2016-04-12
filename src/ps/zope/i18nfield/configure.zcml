@@ -12,6 +12,7 @@
 
   <!-- Include package dependencies. -->
   <!-- ============================= -->
+  <include package="zope.security" />
   <include package=".z3cform" zcml:condition="installed z3c.form" />
 
 
