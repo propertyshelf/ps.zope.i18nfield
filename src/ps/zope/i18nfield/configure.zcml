@@ -14,6 +14,7 @@
   <!-- ============================= -->
   <include package="zope.security" />
   <include package=".z3cform" zcml:condition="installed z3c.form" />
+  <include package=".ploneregistry" zcml:condition="installed plone.registry" />
 
 
   <class class=".storage.I18NDict">
