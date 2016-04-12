@@ -14,6 +14,7 @@
   <!-- ============================= -->
   <include package="zope.security" />
   <include package=".z3cform" zcml:condition="installed z3c.form" />
+  <include package=".plone" zcml:condition="installed Products.CMFPlone" />
   <include package=".ploneregistry" zcml:condition="installed plone.registry" />
 
 
