@@ -29,7 +29,7 @@ def to_unicode(value, default=u''):
         if isinstance(value, unicode):
             return value
         return codecs.decode(value or default)
-    except:
+    except Exception:
         return codecs.decode(value or default, 'latin1')
 
 

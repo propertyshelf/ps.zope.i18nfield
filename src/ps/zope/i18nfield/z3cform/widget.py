@@ -225,7 +225,7 @@ class I18NWidget(HTMLFormElement, Widget):
             converter = IDataConverter(self)
             try:
                 self.value = converter.toFieldValue(self.value)
-            except:
+            except Exception:
                 self.value = {}
         if self.value is not None:
             return self.value.get(language)
