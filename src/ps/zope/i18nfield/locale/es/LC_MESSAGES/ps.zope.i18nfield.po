@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiple Listing Service\n"
-"POT-Creation-Date: 2014-11-14 05:09+0000\n"
+"POT-Creation-Date: 2016-10-26 08:55+0000\n"
 "PO-Revision-Date: 2014-11-14 05:22+0000\n"
 "Last-Translator: Thomas Massmann <thomas.massmann@it-spir.it>\n"
 "Language-Team: Spanish (http://www.transifex.com/propertyshelf/MLS/language/es/)\n"
@@ -18,18 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Preferred-Encodings: utf-8 latin1\n"
 
-#: ps/zope/i18nfield/z3cform/widget.py:81
+#: ps/zope/i18nfield/z3cform/widget.py:82
 msgid "Add translation"
 msgstr "Añadir traducción"
 
-#: ps/zope/i18nfield/z3cform/widget.py:76
+#: ps/zope/i18nfield/z3cform/widget.py:77
+#: ps/zope/i18nfield/z3cform/widget_display.pt:11
 msgid "Default"
 msgstr "Por defecto"
 
-#: ps/zope/i18nfield/z3cform/widget.py:77
+#: ps/zope/i18nfield/z3cform/widget.py:78
 msgid "Please copy the default text to the corresponding language."
 msgstr "Por favor copie y pegue el texto por defecto al idioma correspondiente."
 
-#: ps/zope/i18nfield/z3cform/widget.py:80
+#: ps/zope/i18nfield/z3cform/widget.py:81
 msgid "Select language"
 msgstr "Seleccione el idioma"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ps.zope.i18nfield\n"
-"POT-Creation-Date: 2014-11-14 05:09+0000\n"
+"POT-Creation-Date: 2016-10-26 09:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,19 +14,19 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: ps.zope.i18nfield\n"
 
-#: ps/zope/i18nfield/z3cform/widget.py:81
+#: ps/zope/i18nfield/z3cform/widget.py:82
 msgid "Add translation"
 msgstr ""
 
-#: ps/zope/i18nfield/z3cform/widget.py:76
+#: ps/zope/i18nfield/z3cform/widget.py:77
+#: ps/zope/i18nfield/z3cform/widget_display.pt:11
 msgid "Default"
 msgstr ""
 
-#: ps/zope/i18nfield/z3cform/widget.py:77
+#: ps/zope/i18nfield/z3cform/widget.py:78
 msgid "Please copy the default text to the corresponding language."
 msgstr ""
 
-#: ps/zope/i18nfield/z3cform/widget.py:80
+#: ps/zope/i18nfield/z3cform/widget.py:81
 msgid "Select language"
 msgstr ""
-
