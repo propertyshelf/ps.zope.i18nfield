@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.2.dev0 (unreleased)
----------------------
+0.2 (2016-10-26)
+----------------
 
 - Add missing method definition for ILanguageAvailability interface.
 - Add plone.registry persistent adapters.
