@@ -8,7 +8,7 @@ cache:
     - eggs
 install:
   - sed -ie "s#versions-$TRAVIS_PYTHON_VERSION.x#versions#" travis.cfg
-  - pip install zc.buildout
+  - pip install -r requirements.txt
   - buildout -c travis.cfg annotate
   - buildout -c travis.cfg -N -q
 branches:
