@@ -1,23 +1,40 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
-import os
+"""Setup for ps.zope.i18nfield package."""
+
+from setuptools import (
+    find_packages,
+    setup,
+)
 
 version = '0.3.dev0'
+description = 'A zope.schema field for inline translations.'
+long_description = ('\n'.join([
+    open('README.rst').read(),
+    'Contributors',
+    '------------\n',
+    open('CONTRIBUTORS.rst').read(),
+    open('CHANGES.rst').read(),
+]))
 
+install_requires = [
+    'setuptools',
+    # -*- Extra requirements: -*-
+    'ZODB3',
+    'z3c.indexer',
+    'zope.globalrequest',
+    'zope.i18n',
+    'zope.interface',
+    'zope.schema',
+]
 
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
-
-long_description = (
-    read('README.rst')
-    + '\n' +
-    read('CHANGES.rst'))
 
 setup(
     name='ps.zope.i18nfield',
     version=version,
-    description="A zope.schema field for inline translations.",
+    description=description,
     long_description=long_description,
+    # Get more strings from
+    # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Web Environment",
@@ -37,11 +54,11 @@ setup(
     url='https://github.com/propertyshelf/ps.zope.i18nfield',
     download_url='http://pypi.python.org/pypi/ps.zope.i18nfield',
     license='GPL',
-    packages=find_packages('src'),
+    packages=find_packages('src', exclude=['ez_setup']),
     package_dir={'': 'src'},
     namespace_packages=['ps', 'ps.zope'],
-    zip_safe=False,
     include_package_data=True,
+    zip_safe=False,
     extras_require=dict(
         test=[
             'unittest2',
@@ -53,15 +70,7 @@ setup(
             'zope.traversing',
         ],
     ),
-    install_requires=[
-        'setuptools',
-        'ZODB3',
-        'z3c.indexer',
-        'zope.globalrequest',
-        'zope.i18n',
-        'zope.interface',
-        'zope.schema',
-    ],
+    install_requires=install_requires,
     entry_points="""
     # -*- Entry points: -*-
     """,
