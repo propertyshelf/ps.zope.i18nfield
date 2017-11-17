@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.3 (unreleased)
+0.3 (2017-11-17)
 ----------------
 
 - Add __hash__ method to I18NDict.
