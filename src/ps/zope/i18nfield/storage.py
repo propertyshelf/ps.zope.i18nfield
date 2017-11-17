@@ -56,6 +56,9 @@ class I18NDict(PersistentDict):
         lang_req = utils.get_language()
         return self.get_for_language(lang_req) is not None
 
+    def __hash__(self):
+        return hash(str(self))
+
     def __setitem__(self, key, value):
         """Set a new value, but first doing a validity check."""
         if not value:
