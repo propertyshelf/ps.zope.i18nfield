@@ -2,7 +2,10 @@
 """Integration tests for the I18NDict."""
 
 # python imports
-import unittest
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
 
 # zope imports
 from zope.component import provideUtility
