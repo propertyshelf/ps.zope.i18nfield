@@ -5,6 +5,7 @@ from setuptools import (
     find_packages,
     setup,
 )
+import sys
 
 version = '0.3.dev0'
 description = 'A zope.schema field for inline translations.'
@@ -26,6 +27,17 @@ install_requires = [
     'zope.interface',
     'zope.schema',
 ]
+
+test_requires = [
+    'z3c.form [test]',
+    'zope.browserpage',
+    'zope.publisher',
+    'zope.testing',
+    'zope.traversing',
+]
+
+if sys.version_info[:3] < (2, 7, 0):
+    test_requires.append('unittest2')
 
 
 setup(
@@ -60,13 +72,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     extras_require=dict(
-        test=[
-            'z3c.form [test]',
-            'zope.browserpage',
-            'zope.publisher',
-            'zope.testing',
-            'zope.traversing',
-        ],
+        test=test_requires,
     ),
     install_requires=install_requires,
     entry_points="""
