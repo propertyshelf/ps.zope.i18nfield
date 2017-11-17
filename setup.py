@@ -61,9 +61,8 @@ setup(
     zip_safe=False,
     extras_require=dict(
         test=[
-            'unittest2',
+            'unittest',
             'z3c.form [test]',
-            'zc.buildout',
             'zope.browserpage',
             'zope.publisher',
             'zope.testing',

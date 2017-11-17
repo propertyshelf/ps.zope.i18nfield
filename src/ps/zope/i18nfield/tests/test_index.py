@@ -2,10 +2,7 @@
 """Integration tests for the I18NFieldIndex."""
 
 # python imports
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+import unittest
 
 # zope imports
 from zope.component import provideUtility
