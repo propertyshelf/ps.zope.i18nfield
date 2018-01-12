@@ -1,9 +1,16 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope">
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c">
 
   <!-- Utility for available (allowed) languages. -->
   <utility
       factory=".utils.LanguageAvailability"
+      />
+
+  <z3c:widgetTemplate
+      mode="input"
+      template="plone5_input.pt"
+      widget="ps.zope.i18nfield.z3cform.interfaces.II18NWidget"
       />
 
 </configure>
