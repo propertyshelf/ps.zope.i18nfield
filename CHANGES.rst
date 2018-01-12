@@ -4,7 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add custom widget template for Plone 5.
 
 
 0.3 (2017-11-17)
