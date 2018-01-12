@@ -206,6 +206,8 @@ class I18NWidget(HTMLFormElement, Widget):
                 if lang in available_languages:
                     result[lang] = u''
             else:
+                if not isinstance(lang, unicode):
+                    lang = unicode(lang)
                 if lang in available_languages:
                     result[lang] = self.request.get(key, default)
         if len(result.keys()) < 1:
