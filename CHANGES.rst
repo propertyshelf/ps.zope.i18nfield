@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2018-01-13)
 ----------------
 
 - Don't depend on z3c.indexer which might only be used in pure Zope 3 applications.
