@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 """Storage components."""
 
-# zope imports
 from persistent.dict import PersistentDict
+from ps.zope.i18nfield import interfaces
+from ps.zope.i18nfield import utils
 from zope.interface import implementer
 
-# local imports
-from ps.zope.i18nfield import (
-    interfaces,
-    utils,
-)
 
 _marker = dict()
 KEY_DEFAULT = u'__default_value'

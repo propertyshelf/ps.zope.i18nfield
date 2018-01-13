@@ -1,20 +1,13 @@
 # -*- coding: utf-8 -*-
 """A zope.schema field for inline translations."""
 
-# zope imports
+from ps.zope.i18nfield import interfaces
+from ps.zope.i18nfield import storage
 from zope.interface import implementer
-from zope.schema import (
-    Dict,
-    Text,
-    TextLine,
-)
+from zope.schema import Dict
+from zope.schema import Text
+from zope.schema import TextLine
 from zope.schema.interfaces import RequiredMissing
-
-# local imports
-from ps.zope.i18nfield import (
-    interfaces,
-    storage,
-)
 
 
 @implementer(interfaces.II18NField)

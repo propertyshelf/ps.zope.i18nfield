@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 """Schema interfaces."""
 
-# zope imports
-from zope.i18n.interfaces import ILanguageAvailability as \
-    IBaseLanguageAvailability
+from zope.i18n.interfaces import ILanguageAvailability as IBaseLAvailability
 from zope.interface import Interface
 from zope.schema import interfaces
 
 
-class ILanguageAvailability(IBaseLanguageAvailability):
+class ILanguageAvailability(IBaseLAvailability):
     """A list of available languages."""
 
     def getAvailableLanguages():

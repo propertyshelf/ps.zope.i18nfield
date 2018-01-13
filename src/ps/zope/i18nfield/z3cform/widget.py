@@ -1,56 +1,36 @@
 # -*- coding: utf-8 -*-
 """I18N widget for z3c.form."""
 
-# python imports
 from copy import copy
-import json
-
-# zope imports
 from persistent.dict import PersistentDict
 from plone.memoize.view import memoize
-from z3c.form.browser import (
-    text,
-    textarea,
-)
+from ps.zope.i18nfield import interfaces
+from ps.zope.i18nfield import storage
+from ps.zope.i18nfield import utils
+from ps.zope.i18nfield.i18n import _
+from ps.zope.i18nfield.z3cform.interfaces import II18NTextAreaWidget
+from ps.zope.i18nfield.z3cform.interfaces import II18NTextWidget
+from ps.zope.i18nfield.z3cform.interfaces import II18NWidget
+from z3c.form.browser import text
+from z3c.form.browser import textarea
 from z3c.form.browser.widget import HTMLFormElement
-from z3c.form.interfaces import (
-    NO_VALUE,
-    IDataConverter,
-    IFieldWidget,
-    IFormLayer,
-)
-from z3c.form.widget import (
-    FieldWidget,
-    Widget,
-)
-from zope.component import (
-    adapter,
-    queryUtility,
-)
+from z3c.form.interfaces import IDataConverter
+from z3c.form.interfaces import IFieldWidget
+from z3c.form.interfaces import IFormLayer
+from z3c.form.interfaces import NO_VALUE
+from z3c.form.widget import FieldWidget
+from z3c.form.widget import Widget
+from zope.component import adapter
+from zope.component import queryUtility
 from zope.i18n import translate
-from zope.interface import (
-    implementer,
-    implementsOnly,
-)
+from zope.interface import implementer
+from zope.interface import implementsOnly
 from zope.publisher.browser import BrowserView
-from zope.publisher.interfaces import (
-    IPublishTraverse,
-    NotFound,
-)
+from zope.publisher.interfaces import IPublishTraverse
+from zope.publisher.interfaces import NotFound
 from zope.security.proxy import removeSecurityProxy
 
-# local imports
-from ps.zope.i18nfield import (
-    interfaces,
-    storage,
-    utils,
-)
-from ps.zope.i18nfield.i18n import _
-from ps.zope.i18nfield.z3cform.interfaces import (
-    II18NTextAreaWidget,
-    II18NTextWidget,
-    II18NWidget,
-)
+import json
 
 
 class I18NWidgetProperty(object):

@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
 """Adapter for plone.registry."""
 
-# zope imports
-from plone.registry.field import (
-    DisallowedProperty,
-    InterfaceConstrainedProperty,
-    StubbornProperty,
-    PersistentField,
-)
+from plone.registry.field import DisallowedProperty
+from plone.registry.field import InterfaceConstrainedProperty
+from plone.registry.field import PersistentField
+from plone.registry.field import StubbornProperty
 from plone.registry.interfaces import IPersistentField
-from zope.component import adapter
-from zope.interface import implementer
-
-# local imports
 from ps.zope.i18nfield.field import I18NField
 from ps.zope.i18nfield.interfaces import II18NField
+from zope.component import adapter
+from zope.interface import implementer
 
 
 TRACE = 'The property `{0}` cannot be adapted to `{1}`.'

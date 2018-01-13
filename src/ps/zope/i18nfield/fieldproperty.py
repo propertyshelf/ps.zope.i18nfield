@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 
-# zope imports
+from ps.zope.i18nfield import interfaces
+from ps.zope.i18nfield import storage
+from ps.zope.i18nfield import utils
 from zope import schema
 
-# local imports
-from ps.zope.i18nfield import (
-    interfaces,
-    storage,
-    utils,
-)
 
 _marker = dict()
 

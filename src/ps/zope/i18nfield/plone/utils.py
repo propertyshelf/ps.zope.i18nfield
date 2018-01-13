@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 """Utility definitions for Plone usage."""
 
-# zope imports
 from plone import api
-from plone.i18n.locales.languages import (
-    _languagelist,
-    _combinedlanguagelist,
-)
-from zope.interface import implementer
-
-# local imports
+from plone.i18n.locales.languages import _combinedlanguagelist
+from plone.i18n.locales.languages import _languagelist
 from ps.zope.i18nfield.interfaces import ILanguageAvailability
+from zope.interface import implementer
 
 
 @implementer(ILanguageAvailability)

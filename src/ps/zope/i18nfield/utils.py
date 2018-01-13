@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 """Helper methods for the I18N field."""
 
-# python imports
-import codecs
-
-# zope imports
+from ps.zope.i18nfield.interfaces import ILanguageAvailability
 from zope.component import queryUtility
 from zope.globalrequest import getRequest
 from zope.i18n.negotiator import negotiator
 
-# local imports
-from ps.zope.i18nfield.interfaces import ILanguageAvailability
+import codecs
+
 
 DEFAULT_LANGUAGE = u'en'
 

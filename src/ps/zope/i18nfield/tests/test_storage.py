@@ -1,22 +1,17 @@
 # -*- coding: utf-8 -*-
 """Integration tests for the I18NDict."""
 
-# python imports
+from ps.zope.i18nfield import interfaces
+from ps.zope.i18nfield import storage
+from ps.zope.i18nfield import utils
+from zope.component import provideUtility
+from zope.interface import implementer
+
+
 try:
     import unittest2 as unittest
 except ImportError:
     import unittest
-
-# zope imports
-from zope.component import provideUtility
-from zope.interface import implementer
-
-# local imports
-from ps.zope.i18nfield import (
-    interfaces,
-    storage,
-    utils,
-)
 
 
 @implementer(interfaces.ILanguageAvailability)
