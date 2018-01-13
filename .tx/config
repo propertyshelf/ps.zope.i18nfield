@@ -1,6 +1,6 @@
 [MLS.pszopei18nfield]
-file_filter = src/ps/zope/i18nfield/locale/<lang>/LC_MESSAGES/ps.zope.i18nfield.po
-source_file = src/ps/zope/i18nfield/locale/ps.zope.i18nfield.pot
+file_filter = src/ps/zope/i18nfield/locales/<lang>/LC_MESSAGES/ps.zope.i18nfield.po
+source_file = src/ps/zope/i18nfield/locales/ps.zope.i18nfield.pot
 source_lang = en
 
 

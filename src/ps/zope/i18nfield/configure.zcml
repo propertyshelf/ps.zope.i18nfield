@@ -7,7 +7,7 @@
 
   <!-- Register i18n support. -->
   <!-- ====================== -->
-  <i18n:registerTranslations directory="locale" />
+  <i18n:registerTranslations directory="locales" />
 
 
   <!-- Include package dependencies. -->
