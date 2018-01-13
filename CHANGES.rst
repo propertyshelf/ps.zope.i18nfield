@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2018-01-13)
 ----------------
 
 - Fix unicode error in z3c.form data converter.
