@@ -4,6 +4,7 @@ Changelog
 0.4 (unreleased)
 ----------------
 
+- Fix unicode error in z3c.form data converter.
 - Add custom widget template for Plone 5.
 
 
