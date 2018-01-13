@@ -48,7 +48,7 @@ setup(
     # Get more strings from
     # http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Zope3",
         "Intended Audience :: Other Audience",
