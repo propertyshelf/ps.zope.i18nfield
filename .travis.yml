@@ -11,7 +11,7 @@ matrix:
     - python: 2.6
 install:
   - sed -ie "s#versions-$TRAVIS_PYTHON_VERSION.x#versions#" travis.cfg
-  - pip install -r requirements.txt
+  - pip install -r requirements_$TRAVIS_PYTHON_VERSION.txt
   - buildout -c travis.cfg annotate
   - buildout -c travis.cfg -N -q
 branches:
