@@ -21,7 +21,6 @@ install_requires = [
     'setuptools',
     # -*- Extra requirements: -*-
     'ZODB3',
-    'z3c.indexer',
     'zope.globalrequest',
     'zope.i18n',
     'zope.interface',
@@ -30,6 +29,7 @@ install_requires = [
 
 test_requires = [
     'z3c.form [test]',
+    'z3c.indexer',
     'zope.browserpage',
     'zope.publisher',
     'zope.testing',
