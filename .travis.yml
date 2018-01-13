@@ -9,17 +9,31 @@ cache:
 matrix:
   allow_failures:
     - python: 2.6
+addons:
+  firefox: 45.8.0esr
+before_install:
+  # FIXME: We have no idea how and why six==1.11.0 is being installed
+  - pip uninstall -y six
 install:
   - sed -ie "s#versions-$TRAVIS_PYTHON_VERSION.x#versions#" travis.cfg
+  - mkdir -p buildout-cache/eggs
+  - mkdir -p buildout-cache/downloads
   - pip install -r requirements_$TRAVIS_PYTHON_VERSION.txt
   - buildout -c travis.cfg annotate
   - buildout -c travis.cfg -N -q
-branches:
-  only:
-    - master
+before_script:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - firefox -v
 script:
   - bin/code-analysis
   - bin/test
+after_success:
+  - bin/createcoverage
+  - pip install coveralls
+  - coveralls
 notifications:
+  email:
+    - development@propertyshelf.com
   hipchat:
     secure: "Fw+g7XjsSvYmpWHT/DaUrQQ0eDxY+AGk+t1455c6nL9CnpPLQICCifHZT0Gl3Bcodona6a798Z5/YzqzevuiUmvmnbRHdPjsh5dAxv0cMaE/EonK3CHUjVb843NyeHre9N/7/Wci7S0cFjoEWPbOomQ1CCkUB9GJ9sl/9x4QeLI="
