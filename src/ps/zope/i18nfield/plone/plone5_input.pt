@@ -22,6 +22,9 @@
             tal:condition="python: language in available_languages">
           <div style="margin: 1em 0;" tal:define="widget python:view.getWidget(language)">
               <input type="text" tal:replace="structure widget/render" />
+              <div class="controls" style="overflow: hidden;">
+                <button style="margin-top: 1em; float: right;" i18n:translate="" id="${view/id}-button_remove" class="destructive" name="${view/name}.button_remove" value="${language}">Remove translation</button>
+              </div>
           </div>
         </div>
       </section>

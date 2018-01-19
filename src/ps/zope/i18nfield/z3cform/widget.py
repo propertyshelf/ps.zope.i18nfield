@@ -180,6 +180,7 @@ class I18NWidget(HTMLFormElement, Widget):
         """See z3c.form.interfaces.IWidget."""
         form_keys = self.request.form.keys()
         can_add = '{0}.button_add'.format(self.name) in form_keys
+        can_remove = '{0}.button_remove'.format(self.name) in form_keys
         available_languages = copy(self.sorted_languages())
         available_languages.append(storage.KEY_DEFAULT)
         result = {}
@@ -199,6 +200,11 @@ class I18NWidget(HTMLFormElement, Widget):
                     lang = unicode(lang)
                 if lang in available_languages:
                     result[lang] = self.request.get(key, default)
+        if can_remove:
+            key = '{0}.button_remove'.format(self.name)
+            value = self.request.form.get(key)
+            if value in result.keys():
+                del result[value]
         if len(result.keys()) < 1:
             result = default
         return result
