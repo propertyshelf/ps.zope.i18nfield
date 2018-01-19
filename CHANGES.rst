@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6 (unreleased)
+0.6 (2018-01-19)
 ----------------
 
 - Add widget option for custom default language.
