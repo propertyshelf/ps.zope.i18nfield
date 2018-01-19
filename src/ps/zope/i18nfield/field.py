@@ -25,8 +25,7 @@ class I18NField(Dict):
         super(I18NField, self).__init__(
             key_type=TextLine(),
             value_type=value_type,
-            **kw
-        )
+            **kw)
         self._default_language = default_language
 
     def _validate(self, value):
@@ -53,10 +52,9 @@ class I18NTextLine(I18NField):
                 constraint=value_constraint,
                 min_length=value_min_length,
                 max_length=value_max_length,
-                required=False
+                required=False,
             ),
-            **kw
-        )
+            **kw)
 
 
 @implementer(interfaces.II18NTextField)
@@ -70,7 +68,6 @@ class I18NText(I18NField):
                 constraint=value_constraint,
                 min_length=value_min_length,
                 max_length=value_max_length,
-                required=False
+                required=False,
             ),
-            **kw
-        )
+            **kw)

@@ -56,7 +56,7 @@ class I18NWidget(HTMLFormElement, Widget):
     show_label = True
     default_label = _(u'Default')
     default_info = _(
-        u'Please copy the default text to the corresponding language.'
+        u'Please copy the default text to the corresponding language.',
     )
     option_select_language = _(u'Select language')
     button_add_language = _(u'Add translation')

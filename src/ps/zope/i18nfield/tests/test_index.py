@@ -58,7 +58,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data2 = storage.I18NDict({
             u'en': u'English with more words',
             u'es': u'Español con más palabras',
-            u'de': u'Deutsch'
+            u'de': u'Deutsch',
         })
         idx.doIndex(222, data2)
         self.assertEqual(len(idx._indices), 3)
@@ -108,7 +108,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data2 = storage.I18NDict({
             u'en': u'English with more words',
             u'es': u'Español con más palabras',
-            u'de': u'Deutsch'
+            u'de': u'Deutsch',
         })
         data2.required = True
         idx.doIndex(222, data2)
@@ -157,7 +157,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data2 = storage.I18NDict({
             u'en': u'English with more words',
             u'es': u'Español con más palabras',
-            u'de': u'Deutschland'
+            u'de': u'Deutschland',
         })
         idx.doIndex(222, data2)
         self.assertEqual(len(idx._indices), 3)
@@ -196,7 +196,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data2 = storage.I18NDict({
             u'en': u'English words',
             u'es': u'Título en español',
-            u'de': u'Deutsch'
+            u'de': u'Deutsch',
         })
         idx.doIndex(222, data2)
 
@@ -232,7 +232,7 @@ class TestI18NFieldIndex(unittest.TestCase):
         data2 = {
             u'en': u'English with more words',
             u'es': u'Español con más palabras',
-            u'de': u'Deutsch'
+            u'de': u'Deutsch',
         }
         idx.doIndex(222, data2)
         self.assertEqual(len(idx._indices), 3)

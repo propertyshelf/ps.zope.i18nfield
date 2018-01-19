@@ -15,7 +15,7 @@ class I18NFieldProperty(schema.fieldproperty.FieldProperty):
     def __init__(self, field, name=None, value_converters=None):
         if not interfaces.II18NField.providedBy(field):
             raise ValueError(
-                u'Provided field must implement II18NField interface.'
+                u'Provided field must implement II18NField interface.',
             )
         if name is None:
             name = field.__name__
@@ -99,5 +99,5 @@ class I18NTextProperty(I18NFieldProperty):
         super(I18NTextProperty, self).__init__(
             field,
             name,
-            value_converters=(utils.to_unicode,)
+            value_converters=(utils.to_unicode,),
         )
