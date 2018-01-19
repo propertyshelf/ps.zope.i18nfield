@@ -54,6 +54,7 @@ class I18NWidget(HTMLFormElement, Widget):
 
     default_widget = None
     show_label = True
+    default_language = None
     default_label = _(u'Default')
     default_info = _(
         u'Please copy the default text to the corresponding language.',
@@ -91,7 +92,15 @@ class I18NWidget(HTMLFormElement, Widget):
             if storage.KEY_DEFAULT in langs and len(langs) == 1:
                 langs.append(utils.get_language(request=self.request))
             return langs
-        return [self.current()]
+        return [self.get_default_language()]
+
+    def get_default_language(self):
+        default = self.default_language
+        if default is None:
+            return self.current()
+        if default not in self.sorted_languages():
+            return self.current()
+        return default
 
     def addable_languages(self):
         languages = self.languages()
