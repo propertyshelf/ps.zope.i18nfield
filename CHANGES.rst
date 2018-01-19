@@ -4,7 +4,8 @@ Changelog
 0.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add widget option for custom default language.
+- Add option to remove existing languages for Plone 5.
 
 
 0.5 (2018-01-13)
