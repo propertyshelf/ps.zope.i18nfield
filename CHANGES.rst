@@ -4,7 +4,7 @@ Changelog
 0.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add custom display widget for Plone 5.
 
 
 0.6 (2018-01-19)
