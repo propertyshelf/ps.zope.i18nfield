@@ -1,12 +1,12 @@
 # --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
 # SOME DESCRIPTIVE TITLE.
 # Translators:
-# Thomas Massmann <thomas.massmann@it-spir.it>, 2014
+# Thomas Massmann <thomas.massmann@it-spir.it>, 2014,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Multiple Listing Service\n"
 "POT-Creation-Date: 2018-01-19 14:12+0000\n"
-"PO-Revision-Date: 2018-01-19 14:13+0000\n"
+"PO-Revision-Date: 2018-01-23 09:37+0000\n"
 "Last-Translator: Thomas Massmann <thomas.massmann@it-spir.it>\n"
 "Language-Team: Spanish (http://www.transifex.com/propertyshelf/MLS/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "Por favor copie y pegue el texto por defecto al idioma correspondiente."
 
 #: ps/zope/i18nfield/plone/plone5_input.pt:26
 msgid "Remove translation"
-msgstr ""
+msgstr "Eliminar traducción"
 
 #: ps/zope/i18nfield/z3cform/widget.py:62
 msgid "Select language"
