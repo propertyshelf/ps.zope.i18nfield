@@ -8,6 +8,7 @@ from ps.zope.i18nfield import interfaces
 from ps.zope.i18nfield import storage
 from ps.zope.i18nfield import utils
 from ps.zope.i18nfield.i18n import _
+from ps.zope.i18nfield.utils import get_default_language
 from ps.zope.i18nfield.z3cform.interfaces import II18NTextAreaWidget
 from ps.zope.i18nfield.z3cform.interfaces import II18NTextWidget
 from ps.zope.i18nfield.z3cform.interfaces import II18NWidget
@@ -96,10 +97,13 @@ class I18NWidget(HTMLFormElement, Widget):
 
     def get_default_language(self):
         default = self.default_language
+        current = self.current()
         if default is None:
-            return self.current()
+            default = current
         if default not in self.sorted_languages():
-            return self.current()
+            # if default or current are not in the avaible choices
+            # just use the default_language
+            default = get_default_language()
         return default
 
     def addable_languages(self):
