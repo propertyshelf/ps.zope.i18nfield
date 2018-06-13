@@ -54,6 +54,7 @@ def available_languages():
         return utility.getAvailableLanguages()
     return [DEFAULT_LANGUAGE]
 
+
 def sorted_languages():
     utility = queryUtility(ILanguageAvailability)
     if utility is not None:
