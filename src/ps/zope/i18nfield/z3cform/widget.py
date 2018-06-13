@@ -119,16 +119,8 @@ class I18NWidget(HTMLFormElement, Widget):
 
     @memoize
     def sorted_languages(self):
-        available = utils.available_languages()
-        tmp_languages = sorted([unicode(key) for key in available])
-        languages = []
-        if u'en' in tmp_languages:
-            tmp_languages.remove(u'en')
-            languages.append(u'en')
-        if u'es' in tmp_languages:
-            tmp_languages.remove(u'es')
-            languages.append(u'es')
-        languages.extend(tmp_languages)
+        languages = utils.sorted_languages()
+
         return languages
 
     @memoize
