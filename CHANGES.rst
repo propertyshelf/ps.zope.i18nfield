@@ -4,7 +4,8 @@ Changelog
 0.8 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Don't use formControls div to prevent modals bug.
+- Moved sorting method to utility to make it easier to customize sort order.
 
 
 0.7 (2018-01-23)
