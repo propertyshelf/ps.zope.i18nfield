@@ -21,7 +21,7 @@ class ILanguageAvailability(IBaseLAvailability):
     def getLanguageListing(combined=False):
         """Return a sequence of language code and language name tuples."""
 
-    def getSortedLanguages(self):
+    def get_sorted_languages(self):
         """Return a sequence of language code. Sorted for displaying Languages"""
 
 

@@ -58,7 +58,7 @@ def available_languages():
 def sorted_languages():
     utility = queryUtility(ILanguageAvailability)
     if utility is not None:
-        return utility.getSortedLanguages()
+        return utility.get_sorted_languages()
     available = available_languages()
     tmp_languages = sorted([unicode(key) for key in available])
     languages = []

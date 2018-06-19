@@ -37,7 +37,7 @@ class LanguageAvailability(object):
             languages.update(_combinedlanguagelist.copy())
         return [(code, languages[code][u'name']) for code in languages]
 
-    def getSortedLanguages(self):
+    def get_sorted_languages(self):
         available = self.getAvailableLanguages()
         tmp_languages = sorted([unicode(key) for key in available])
         languages = []
