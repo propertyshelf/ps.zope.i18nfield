@@ -21,6 +21,9 @@ class ILanguageAvailability(IBaseLAvailability):
     def getLanguageListing(combined=False):
         """Return a sequence of language code and language name tuples."""
 
+    def get_sorted_languages(self):
+        """Return a sequence of language code. Sorted for displaying Languages"""
+
 
 class II18NField(interfaces.IDict):
     """Marker interface used to identify I18N properties."""

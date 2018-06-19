@@ -36,3 +36,16 @@ class LanguageAvailability(object):
         if combined:
             languages.update(_combinedlanguagelist.copy())
         return [(code, languages[code][u'name']) for code in languages]
+
+    def get_sorted_languages(self):
+        available = self.getAvailableLanguages()
+        tmp_languages = sorted([unicode(key) for key in available])
+        languages = []
+        if u'en' in tmp_languages:
+            tmp_languages.remove(u'en')
+            languages.append(u'en')
+        if u'es' in tmp_languages:
+            tmp_languages.remove(u'es')
+            languages.append(u'es')
+        languages.extend(tmp_languages)
+        return languages

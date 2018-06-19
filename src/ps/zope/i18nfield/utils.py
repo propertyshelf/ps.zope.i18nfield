@@ -53,3 +53,20 @@ def available_languages():
     if utility is not None:
         return utility.getAvailableLanguages()
     return [DEFAULT_LANGUAGE]
+
+
+def sorted_languages():
+    utility = queryUtility(ILanguageAvailability)
+    if utility is not None:
+        return utility.get_sorted_languages()
+    available = available_languages()
+    tmp_languages = sorted([unicode(key) for key in available])
+    languages = []
+    if u'en' in tmp_languages:
+        tmp_languages.remove(u'en')
+        languages.append(u'en')
+    if u'es' in tmp_languages:
+        tmp_languages.remove(u'es')
+        languages.append(u'es')
+    languages.extend(tmp_languages)
+    return languages
