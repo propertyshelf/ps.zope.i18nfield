@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 (unreleased)
+0.8 (2018-06-19)
 ----------------
 
 - Don't use formControls div to prevent modals bug.
