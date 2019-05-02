@@ -181,8 +181,9 @@ class I18NWidget(HTMLFormElement, Widget):
         available_languages.append(storage.KEY_DEFAULT)
         result = {}
 
+        dot_name = '{0}.'.format(self.name)
         for key in form_keys:
-            if not key.startswith(self.name):
+            if not key.startswith(dot_name):
                 continue
             lang = key.split('.').pop()
             if lang == 'add' and can_add:
