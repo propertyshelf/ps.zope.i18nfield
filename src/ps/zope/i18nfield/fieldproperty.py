@@ -41,7 +41,7 @@ class I18NFieldProperty(schema.fieldproperty.FieldProperty):
         # prepare the values
         value = self.prepare_dict(value)
         old_value = getattr(instance, self.__name, None)
-        if old_value is None and isinstance(value, basestring):
+        if old_value is None and isinstance(value, str):
             value = storage.I18NDict.from_text(value)
         if isinstance(value, storage.I18NDict):
             validate_dict = value.to_dict()

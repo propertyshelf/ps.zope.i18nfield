@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Storage components."""
+from functools import total_ordering
 
 from persistent.dict import PersistentDict
 from ps.zope.i18nfield import interfaces
@@ -10,7 +11,7 @@ from zope.interface import implementer
 _marker = dict()
 KEY_DEFAULT = u'__default_value'
 
-
+@total_ordering
 @implementer(interfaces.II18NDict)
 class I18NDict(PersistentDict):
     """A custom dictionnary handling a default value."""
@@ -28,7 +29,14 @@ class I18NDict(PersistentDict):
         self.default_language = None
         self.required = False
 
-    def __unicode__(self):
+    def __lt__(self, other):
+        return str(self) < str(other)
+
+    def __eq__(self, other):
+        return str(self) == str(other)
+
+
+    def __str__(self):
         """Return the unicode representation of the dictionary by first trying
         to access the value for the current selected language (i.e. from the
         request). If no value exists for this language and the associated
@@ -41,11 +49,11 @@ class I18NDict(PersistentDict):
         value = self.get_for_language(lang_req)
         if value is None:
             return u''
-        return unicode(value)
+        return value
 
-    def __str__(self):
-        """Return the utf-8 encoded respresentation of the dictionary."""
-        return unicode(self).encode('utf-8')
+#    def __str__(self):
+#        """Return the utf-8 encoded respresentation of the dictionary."""
+#        return self
 
     def __nonzero__(self):
         """Return whether the dictionary is considered empty or not."""
