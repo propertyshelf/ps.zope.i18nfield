@@ -25,7 +25,7 @@ from zope.component import adapter
 from zope.component import queryUtility
 from zope.i18n import translate
 from zope.interface import implementer
-from zope.interface import implementsOnly
+from zope.interface import implementer_only
 from zope.publisher.browser import BrowserView
 from zope.publisher.interfaces import IPublishTraverse
 from zope.publisher.interfaces import NotFound
@@ -49,9 +49,9 @@ class I18NWidgetProperty(object):
             setattr(widget, self.__name, value)
 
 
+@implementer_only(II18NWidget)
 class I18NWidget(HTMLFormElement, Widget):
     """Base class for all I18N widgets."""
-    implementsOnly(II18NWidget)
 
     default_widget = None
     show_label = True
@@ -192,8 +192,8 @@ class I18NWidget(HTMLFormElement, Widget):
                 if lang in available_languages:
                     result[lang] = u''
             else:
-                if not isinstance(lang, unicode):
-                    lang = unicode(lang)
+                if not isinstance(lang, str):
+                    lang = str(lang)
                 if lang in available_languages:
                     result[lang] = self.request.get(key, default)
         if can_remove:
@@ -234,9 +234,9 @@ class I18NWidget(HTMLFormElement, Widget):
         return translate(self.button_add_language, context=self.request)
 
 
+@implementer_only(II18NTextWidget)
 class I18NTextWidget(I18NWidget, text.TextWidget):
     """I18N text input type implementation."""
-    implementsOnly(II18NTextWidget)
 
     default_widget = text.TextWidget
 
@@ -254,10 +254,9 @@ def I18NTextFieldWidget(field, request):
     """IFieldWidget factory for I18NTextWidget."""
     return FieldWidget(field, I18NTextWidget(request))
 
-
+@implementer_only(II18NTextAreaWidget)
 class I18NTextAreaWidget(I18NWidget, textarea.TextAreaWidget):
     """I18N text input type implementation."""
-    implementsOnly(II18NTextAreaWidget)
 
     default_widget = textarea.TextAreaWidget
 
