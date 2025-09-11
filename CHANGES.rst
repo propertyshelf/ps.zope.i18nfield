@@ -4,7 +4,7 @@ Changelog
 0.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Bug fix: Match the exact field name instead of just the prefix, to avoid issues when other fields start with the same prefix.
 
 
 0.8 (2018-06-19)
