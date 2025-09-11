@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.9 (unreleased)
-----------------
+0.8.1 (2025-09-10)
+------------------
 
 - Bug fix: Match the exact field name instead of just the prefix, to avoid issues when other fields start with the same prefix.
 

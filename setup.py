@@ -7,7 +7,7 @@ from setuptools import (
 )
 import sys
 
-version = '0.9.dev0'
+version = '0.8.1'
 description = 'A zope.schema field for inline translations.'
 long_description = ('\n'.join([
     open('README.rst').read(),
