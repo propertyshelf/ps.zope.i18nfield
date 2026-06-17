@@ -108,28 +108,28 @@ class TestI18NDict(unittest.TestCase):
         data.required = True
 
         # no request, no values
-        self.assertEqual(unicode(data), u'')
+        self.assertEqual(str(data), u'')
 
         # no request - fallback to first value
         data[u'fr'] = u'French'
-        self.assertEqual(unicode(data), u'French')
+        self.assertEqual(str(data), u'French')
 
         # no request - fallback to global default (English)
         data[u'en'] = u'English'
         data[u'es'] = u'Español'
-        self.assertEqual(unicode(data), u'English')
+        self.assertEqual(str(data), u'English')
 
         # request language Spanish
         utils.get_language = lambda: u'es'
-        self.assertEqual(unicode(data), u'Español')
+        self.assertEqual(str(data), u'Español')
 
         # request language French
         utils.get_language = lambda: u'fr'
-        self.assertEqual(unicode(data), u'French')
+        self.assertEqual(str(data), u'French')
 
         # request language English
         utils.get_language = lambda: u'en'
-        self.assertEqual(unicode(data), u'English')
+        self.assertEqual(str(data), u'English')
 
     def test_string_representation(self):
         """Test the __str__ method of the dictionary."""
@@ -172,17 +172,17 @@ class TestI18NDict(unittest.TestCase):
         data[u'es'] = u'Español'
 
         # no request, no value for default language 'en'
-        self.assertEqual(unicode(data), u'')
+        self.assertEqual(str(data), u'')
 
         # with required
         data.required = True
-        self.assertEqual(unicode(data), u'Español')
+        self.assertEqual(str(data), u'Español')
 
     def test_from_text(self):
         """Test the from_text method."""
         data = storage.I18NDict.from_text(u'Test value')
         self.assertEqual(data, {u'__default_value': u'Test value'})
-        self.assertEqual(unicode(data), u'Test value')
+        self.assertEqual(str(data), u'Test value')
 
     def test_to_dict(self):
         original = storage.I18NDict()

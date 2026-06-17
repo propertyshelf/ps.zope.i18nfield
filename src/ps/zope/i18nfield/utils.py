@@ -23,10 +23,10 @@ def to_unicode(value, default=u''):
     :rtype: unicode
     """
     try:
-        if isinstance(value, unicode):
+        if isinstance(value, str):
             return value
         return codecs.decode(value or default)
-    except Exception:
+    except UnicodeDecodeError as e:
         return codecs.decode(value or default, 'latin1')
 
 

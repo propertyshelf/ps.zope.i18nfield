@@ -39,7 +39,7 @@ class LanguageAvailability(object):
 
     def get_sorted_languages(self):
         available = self.getAvailableLanguages()
-        tmp_languages = sorted([unicode(key) for key in available])
+        tmp_languages = sorted([str(key) for key in available])
         languages = []
         if u'en' in tmp_languages:
             tmp_languages.remove(u'en')
